@@ -2,6 +2,7 @@ const express = require('express')
 const mqtt = require('mqtt')
 const { exec } = require('child_process');
 const fs = require('fs')
+const path = require('path')
 const app = express()
 let port1 = 3001
 
@@ -79,7 +80,7 @@ async function connectSerialPort() {
 // this one is commented for i am not using uart 
 connectSerialPort();
 
-app.use(express.static(path.join(__dirname, "build"), { cacheControl: false }));
+app.use(express.static(path.join(__dirname, "../frontend/build"), { cacheControl: false }));
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "build", "index.html"));
 });
