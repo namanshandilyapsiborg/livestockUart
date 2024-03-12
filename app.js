@@ -4,7 +4,7 @@ const { exec } = require('child_process');
 const fs = require('fs')
 const path = require('path')
 const app = express()
-let port1 = 3001
+let port1 = 3000
 
 const { SerialPort } = require("serialport");
 const port = new SerialPort({ path: "/dev/ttyAMA0", baudRate: 2000000 });
