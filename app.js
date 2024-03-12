@@ -14,6 +14,8 @@ let port1 = 3001
 
 const client = mqtt.connect('mqtt://localhost');
 
+const client2 = mqtt.connect('mqtt://103.127.30.171');
+
 // Connect to the broker
 client.on('connect', () => {
 console.log('Publisher connect to MQTT broker');
@@ -31,6 +33,24 @@ console.log('Subscribe Failed', err);
 
 });
 
+
+// Connect to the broker
+client2.on('connect', () => {
+    console.log('Publisher connect to Main Server MQTT broker');
+    
+    // Subscribe to the topic
+    client2.subscribe('livestokeGateway', (err) => {
+    if(!err){
+    console.log('Subscribed to the topic');
+    
+    }else{
+    console.log('Subscribe Failed', err);
+    }
+    
+    });
+    
+    });
+
 // Handle incomming message
 client.on('message', (topic, message) => {
 console.log(`Received message on topic '${topic}': ${message.toString()}`);
@@ -38,11 +58,18 @@ console.log(`Received message on topic '${topic}': ${message.toString()}`);
 });
 
 
+// Handle incomming message
+client2.on('message', (topic, message) => {
+    console.log(`Received message on topic '${topic}': ${message.toString()}`);
+    
+    });
+
 async function connectSerialPort() {
     try {
         parser.on("data", async (data) => {
             console.log("Data from port Device=====>", data);
 	client.publish('livestokeServer', data);
+    client2.publish('livestokeServer', data);
 });
     } catch (error) {
         console.log(error, 'error from my side app')
