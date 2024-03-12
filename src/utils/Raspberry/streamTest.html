@@ -1,0 +1,19 @@
+<html>
+    <script>
+async function appCamera() {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    console.log(devices,'devices');
+    // const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    // console.log(stream,'stream');
+    const stream = await navigator.mediaDevices.getUserMedia({
+  video: {
+    deviceId: someDeviceIdGoesHere
+  }
+});
+    document.querySelector('videoinput').srcObject = stream;
+
+}
+appCamera()
+
+    </script>
+    </html>

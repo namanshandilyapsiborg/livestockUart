@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Device Configuration</title>
+</head>
+<body>
+  <h1>Device Configuration</h1>
+  <form action="/configure" method="post">
+    <input type="hidden" name="deviceId" value="<%= deviceId %>">
+    <label for="wifiPassword">Wi-Fi Password:</label>
+    <input type="password" id="wifiPassword" name="wifiPassword">
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
